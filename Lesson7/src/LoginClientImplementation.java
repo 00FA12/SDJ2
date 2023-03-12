@@ -18,7 +18,6 @@ public class LoginClientImplementation implements LoginClient
   @Override public void close() throws IOException
   {
     writer.println("exit");
-    writer.flush();
     socket.close();
   }
   public boolean login(String username, String password)
@@ -47,10 +46,10 @@ public class LoginClientImplementation implements LoginClient
         throw new IllegalArgumentException("Program needs a password");
       }
 
-      if (!reader.readLine().equals("approved"))
-      {
-        throw new IllegalArgumentException("Program needs \"approved\" to continue");
-      }
+//      if (!reader.readLine().equals("approved"))
+//      {
+//        throw new IllegalArgumentException("Program needs \"approved\" to continue");
+//      }
     }
     catch (IOException e)
     {

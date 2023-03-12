@@ -20,9 +20,9 @@ public class LoginCommunicator implements Runnable
       InputStream inputStream = socket.getInputStream();
       BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
       OutputStream outputStream = socket.getOutputStream();
-      PrintWriter writer = new PrintWriter(outputStream);
+      PrintWriter writer = new PrintWriter(outputStream, true);
 
-      while (true)
+      loop : while (true)
       {
         String request = reader.readLine();
         String username = "";
@@ -32,22 +32,29 @@ public class LoginCommunicator implements Runnable
           case "connect":
           {
             writer.println("username");
+            break;
           }
           case "username":
           {
             username = reader.readLine();
             writer.println("password");
+            break;
           }
           case "password":
           {
+            writer.println("password");
             password = reader.readLine();
             writer.println("approved");
+            break;
           }
           case "approved":
           {
-            writer.println(
-                "Welcome " + username + " your password is " + password);
+            writer.println("approved");
+            writer.println("Welcome " + username + " your password is " + password);
+            break;
           }
+          case "exit":
+            break loop;
         }
       }
     }
