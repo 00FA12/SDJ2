@@ -21,12 +21,12 @@ public class LoginCommunicator implements Runnable
       BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
       OutputStream outputStream = socket.getOutputStream();
       PrintWriter writer = new PrintWriter(outputStream, true);
-
+      String username = "";
+      String password = "";
       loop : while (true)
       {
         String request = reader.readLine();
-        String username = "";
-        String password = "";
+
         switch (request)
         {
           case "connect":
